@@ -1,2 +1,2 @@
 export * from './Getkeys'
-export * from './Shortcut'
+export * from './DuckShortcut'
