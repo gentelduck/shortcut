@@ -1,8 +1,8 @@
-# `@ahmedayob/duck-shortcut`
-
 <p align="center">
   <img src="./public/logo.png" alt="Duck UI Logo" width="200"/>
 </p>
+
+# `@ahmedayob/duck-shortcut`
 
 A lightweight React component for easily binding and handling keyboard shortcuts in your React applications.
 
