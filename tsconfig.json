@@ -1,25 +1,39 @@
 {
-    "compilerOptions": {
-        /* Base Options: */
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "target": "es2022",
-        "verbatimModuleSyntax": true,
-        "allowJs": true,
-        "resolveJsonModule": true,
-        "moduleDetection": "force",
-        /* Strictness */
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        /* If NOT transpiling with TypeScript: */
-        "moduleResolution": "Bundler",
-        "module": "ESNext",
-        "noEmit": true,
-        /* If your code runs in the DOM: */
-        "lib": [
-            "es2022",
-            "dom",
-            "dom.iterable"
-        ]
-    }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./lib/*"]
+    },
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "preserve",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "incremental": false,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  }
 }

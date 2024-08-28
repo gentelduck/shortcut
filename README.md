@@ -1,167 +1,173 @@
 # `@ahmedayob/email-toolkit`
 
-A powerful and flexible toolkit for building, validating, and processing emails with TypeScript. This library offers utilities for handling email headers, attachments, and encoding, making it easier to compose and manage emails programmatically.
+A lightweight React component for easily binding and handling keyboard shortcuts in your React applications.
 
 ## Features
 
-- **Email Header Management**: Easily create and manage email headers.
-- **Attachment Handling**: Add, validate, and format email attachments.
-- **Encoding Utilities**: Encode content in Base64 for attachments.
-- **Validation**: Ensure email content, headers, and attachments are valid with built-in validation schemas.
-- **Custom Error Handling**: Handle email-related errors with a custom `EmailError` class.
+- **Easy Integration**: Integrate keyboard shortcuts into your React application effortlessly. Simply use the `useShortcut` hook and pass the required props to handle key combinations or sequences.
+- **Support for Key Combinations**: Handle key combinations like `Ctrl+S` or `Command+K` with ease. The component can take a single string or an array of key combinations.
+- **Support for Key Sequences**: React to key sequences such as `Up Up Down Down Left Right B A Enter`. You can define these sequences as strings or arrays.
+- **Mixed Key Combinations and Sequences**: Combine both key combinations and sequences to define more complex shortcuts.
+- **Global Keyboard Event Listener**: The component adds a global keyboard event listener that works anywhere in the component tree without preventing events from bubbling or capturing.
+- **TypeScript Support**: Fully implemented in TypeScript with type definitions, ensuring a smooth development experience with type safety.
+- **Case Insensitivity**: The component handles key shortcuts in a case-insensitive manner, so you don’t need to worry about key case.
+- **No Conflict with Other Components**: Use multiple instances of `useShortcut` for different shortcuts without conflicts.
 
 ## Installation
 
 To install the toolkit, use npm or yarn:
 
 ```bash
-npm install @ahmedayob/email-toolkit
+npm install @ahmedayob/duck-shortcut
 # or
-yarn add @ahmedayob/email-toolkit
+yarn add @ahmedayob/duck-shortcut
 ```
 
 ## Usage
 
 Here's a quick guide on how to use the library:
 
-### Email Header
+```tsx
+import { useShortcut } from '@ahmedayob/duck-shortcut'
 
-Create and configure email headers:
+const App = () => {
+  useShortcut({
+    keys: ['ctrl+s'], // Key combinations or sequences
+    onKeysPressed: () => {
+      console.log('Ctrl+S was pressed!')
+    },
+  })
 
-```typescript
-import { EmailBuilderHeader } from "@ahmedayob/email-toolkit";
-
-const header = new EmailBuilderHeader();
-header
-  .setFrom("ahmed <ahmed@gmail.com>")
-  .setTo("ahmed <ahmed@gmail.com>")
-  .setCc("ahmed <ahmed@gmail.com>")
-  .setBcc("ahmed <ahmed@gmail.com>")
-  .setSubject("This is a test email subject")
-  .setInReplyTo("ahmed@gmail.com")
-  .setMIMEVersion("1.0")
-  .setContentTransferEncoding("quoted-printable")
-  .setContentType("text/html")
-  .setCharset("utf-8");
+  return <div>Press Ctrl+S to trigger the shortcut</div>
+}
 ```
 
-### Email Attachment
+### Handling Multiple Shortcuts
 
-Add attachments to your email:
+You can handle multiple key combinations or sequences by passing them as an array:
 
 ```typescript
-import { EmailBuilderAttachment, Base64 } from "@ahmedayob/email-toolkit";
+import { useShortcut } from '@ahmedayob/duck-shortcut'
+const App = () => {
+  useShortcut({
+    keys: ['ctrl+s', 'command+k'], // Multiple shortcuts
+    onKeysPressed: () => {
+      console.log('Ctrl+S or Command+K was pressed!')
+    },
+  })
+  return <div>Press Ctrl+S or Command+K to trigger the shortcut</div>
+}
+```
 
-const attachment = new EmailBuilderAttachment();
-attachment.addAttachment({
-  headers: {
-    "Content-Type": 'text/plain; charset="utf-8"',
-    "Content-Transfer-Encoding": "base64",
-    "Content-Disposition": 'attachment; filename="test.txt"',
-  },
-  size: 1234,
-  filename: "test.txt",
-  mimeType: "text/plain",
-  attachmentId: "1234",
-  attachmentContent: Base64.encodeToBase64(
-    "This is the content of the attachment."
-  ),
+## API Reference
+
+Here’s an API reference for `@ahmedayob/duck-shortcut` in MDX format, detailing the types and usage of the `useShortcut` hook:
+
+## `useShortcut`
+
+The `useShortcut` hook allows you to bind keyboard shortcuts to callback functions in your React components.
+
+### Importing
+
+```jsx
+import { useShortcut } from '@ahmedayob/duck-shortcut'
+```
+
+### Usage
+
+```jsx
+useShortcut({
+  keys: /* Key combinations or sequences */,
+  onKeysPressed: /* Callback function */,
 });
 ```
 
-### Building the Email
+### Parameters
 
-Combine headers and attachments to create the final email:
+#### `keys`
 
-```typescript
-import { EmailBuilder } from "@ahmedayob/email-toolkit";
+- **Type**: `string | string[]`
+- **Description**: Defines the keyboard shortcuts to listen for. You can specify key combinations (e.g., `'ctrl+s'`, `'command+k'`) or key sequences (e.g., `'Up Up Down Down Left Right B A Enter'`).
 
-const email = new EmailBuilder();
-email.messagebody = "<p>This is the message body</p>";
+##### Example
 
-const finalEmail = email.getRawMessage(header.headers, attachment.attachments);
-console.log(finalEmail);
+```jsx
+keys: 'ctrl+s'
 ```
 
-### Encoding and Signature
+or
 
-Generate base64-encoded messages and email signatures:
-
-```typescript
-import { EmailBuilder } from "@ahmedayob/email-toolkit";
-
-const email = new EmailBuilder();
-email.messagebody = "<p>This is the message body</p>";
-
-const encodedMessage = email.getEncodedMessage(
-  header.headers,
-  attachment.attachments
-);
-console.log(encodedMessage);
-
-email.setSignature({
-  url: "https://github.com/wildduck2",
-  name: "Ahmed Ayob",
-});
-
-const signature = email.getSignature({
-  from: "ahmed@example.com",
-  url: "https://github.com/wildduck2",
-  name: "Ahmed Ayob",
-});
-console.log(signature.join("\n"));
+```jsx
+keys: ['ctrl+s', 'command+k']
 ```
 
-## API
+or
 
-### `EmailBuilderHeader`
+```jsx
+keys: 'Up Up Down Down Left Right B A Enter'
+```
 
-- **setFrom**(address: string): Sets the "From" header.
-- **setTo**(address: string): Sets the "To" header.
-- **setCc**(address: string): Sets the "Cc" header.
-- **setBcc**(address: string): Sets the "Bcc" header.
-- **setSubject**(subject: string): Sets the email subject.
-- **setInReplyTo**(messageId: string): Sets the "In-Reply-To" header.
-- **setMIMEVersion**(version: string): Sets the "MIME-Version" header.
-- **setContentTransferEncoding**(encoding: string): Sets the "Content-Transfer-Encoding" header.
-- **setContentType**(type: string): Sets the "Content-Type" header.
-- **setCharset**(charset: string): Sets the charset.
+#### `onKeysPressed`
 
-### `EmailBuilderAttachment`
+- **Type**: `() => void`
+- **Description**: Callback function that gets called when the specified key combinations or sequences are pressed.
 
-- **addAttachment**(attachment: AttachmentType): Adds an attachment.
-- **getAttachment**(): Retrieves the formatted attachments.
+##### Example
 
-### `EmailBuilder`
+```jsx
+onKeysPressed: () => {
+  console.log('Shortcut triggered!')
+}
+```
 
-- **messagebody**: Sets the body of the email.
-- **getRawMessage**(headers: HeadersType, attachments?: AttachmentType[]): Gets the raw email message.
-- **getEncodedMessage**(headers: HeadersType, attachments?: AttachmentType[]): Gets the base64-encoded email message.
-- **getSignature**(signatureDetails: GetSignatureType): Generates a formatted signature block.
-- **setSignature**(signatureDetails: NonNullableType<Omit<GetSignatureType, "from">>): Sets the email signature details.
+### Example
 
-### `Base64`
+```jsx
+import { useShortcut } from '@ahmedayob/duck-shortcut'
 
-- **encodeToBase64**(data: string): Encodes data to Base64.
+const App = () => {
+  useShortcut({
+    keys: ['ctrl+s', 'command+k'], // Define your shortcuts
+    onKeysPressed: () => {
+      // Callback when shortcuts are pressed
+      console.log('Shortcut triggered!')
+    },
+  })
 
-### `EmailError`
+  return <div>Press Ctrl+S or Command+K</div>
+}
+```
 
-- **name**: The name of the error.
-- **description**: A description of the error.
-- **constructor**({ message, description }: { message: string; description: string }): Constructs a new `EmailError`.
+### Notes
 
-## Validation
+- **Key Combinations**: These are key presses that need to happen simultaneously (e.g., `'ctrl+s'`, `'command+shift+P'`).
+- **Key Sequences**: These are key presses that need to happen in sequence (e.g., `'Up Up Down Down Left Right B A Enter'`).
+- **Case Sensitivity**: Key names are case-insensitive.
 
-Validation schemas are available to ensure data correctness:
+## Type Definitions
 
-- **HeadersTypeSchema**: Validates email headers.
-- **AttachmentHeaderSchema**: Validates attachment headers.
-- **StringSchema**: Validates strings.
-- **ContentTransferEncodingSchema**: Validates content transfer encodings.
-- **ContentTypeSchema**: Validates content types.
-- **CharsetTypeSchema**: Validates charset types.
+### `ShortcutProps`
+
+```typescript
+interface ShortcutProps {
+  keys: string | string[] // Key combinations or sequences
+  onKeysPressed: () => void // Callback when shortcuts are pressed
+}
+```
+
+### `useShortcut`
+
+```typescript
+declare function useShortcut(props: ShortcutProps): void
+```
+
+## License
+
+This library is available under the [MIT License](LICENSE).
 
 ## Contributing
+
+This reference includes type definitions for `ShortcutProps`, as well as detailed information on how to use the `useShortcut` hook.
 
 Contributions are welcome! Please open issues and pull requests on the [GitHub repository](https://github.com/ahmedayob/email-toolkit).
 
