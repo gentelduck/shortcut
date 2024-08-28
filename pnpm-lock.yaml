@@ -26,6 +26,9 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
+      esbuild:
+        specifier: ^0.23.1
+        version: 0.23.1
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0

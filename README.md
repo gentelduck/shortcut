@@ -1,4 +1,4 @@
-# `@ahmedayob/email-toolkit`
+# `@ahmedayob/duck-shortcut`
 
 A lightweight React component for easily binding and handling keyboard shortcuts in your React applications.
 
@@ -169,7 +169,7 @@ This library is available under the [MIT License](LICENSE).
 
 This reference includes type definitions for `ShortcutProps`, as well as detailed information on how to use the `useShortcut` hook.
 
-Contributions are welcome! Please open issues and pull requests on the [GitHub repository](https://github.com/ahmedayob/email-toolkit).
+Contributions are welcome! Please open issues and pull requests on the [GitHub repository](https://github.com/ahmedayob/shor).
 
 ## License
 

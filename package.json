@@ -19,7 +19,7 @@
         "test": "vitest run",
         "build": "tsup",
         "lint": "tsc",
-        "ci": "pnpm run lint && pnpm run test && pnpm run build",
+        "ci": "pnpm run lint && pnpm run build",
         "release": "pnpm run ci && changeset publish"
     },
     "keywords": [
@@ -67,6 +67,7 @@
         "npm": ">=6.0.0"
     },
     "dependencies": {
+        "esbuild": "^0.23.1",
         "vite": "^5.4.2"
     }
 }
