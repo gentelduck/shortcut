@@ -1,17 +1,21 @@
 # `@ahmedayob/duck-shortcut`
 
+<p align="center">
+  <img src="./public/logo.png" alt="Duck UI Logo" width="200"/>
+</p>
+
 A lightweight React component for easily binding and handling keyboard shortcuts in your React applications.
 
 ## Features
 
-- **Easy Integration**: Integrate keyboard shortcuts into your React application effortlessly. Simply use the `useShortcut` hook and pass the required props to handle key combinations or sequences.
+- **Easy Integration**: Integrate keyboard shortcuts into your React application effortlessly. Simply use the `useDuckShortcut` hook and pass the required props to handle key combinations or sequences.
 - **Support for Key Combinations**: Handle key combinations like `Ctrl+S` or `Command+K` with ease. The component can take a single string or an array of key combinations.
 - **Support for Key Sequences**: React to key sequences such as `Up Up Down Down Left Right B A Enter`. You can define these sequences as strings or arrays.
 - **Mixed Key Combinations and Sequences**: Combine both key combinations and sequences to define more complex shortcuts.
 - **Global Keyboard Event Listener**: The component adds a global keyboard event listener that works anywhere in the component tree without preventing events from bubbling or capturing.
 - **TypeScript Support**: Fully implemented in TypeScript with type definitions, ensuring a smooth development experience with type safety.
 - **Case Insensitivity**: The component handles key shortcuts in a case-insensitive manner, so you don’t need to worry about key case.
-- **No Conflict with Other Components**: Use multiple instances of `useShortcut` for different shortcuts without conflicts.
+- **No Conflict with Other Components**: Use multiple instances of `useDuckShortcut` for different shortcuts without conflicts.
 
 ## Installation
 
@@ -28,10 +32,10 @@ yarn add @ahmedayob/duck-shortcut
 Here's a quick guide on how to use the library:
 
 ```tsx
-import { useShortcut } from '@ahmedayob/duck-shortcut'
+import { useDuckShortcut } from '@ahmedayob/duck-shortcut'
 
 const App = () => {
-  useShortcut({
+  useDuckShortcut({
     keys: ['ctrl+s'], // Key combinations or sequences
     onKeysPressed: () => {
       console.log('Ctrl+S was pressed!')
@@ -47,9 +51,9 @@ const App = () => {
 You can handle multiple key combinations or sequences by passing them as an array:
 
 ```typescript
-import { useShortcut } from '@ahmedayob/duck-shortcut'
+import { useDuckShortcut } from '@ahmedayob/duck-shortcut'
 const App = () => {
-  useShortcut({
+  useDuckShortcut({
     keys: ['ctrl+s', 'command+k'], // Multiple shortcuts
     onKeysPressed: () => {
       console.log('Ctrl+S or Command+K was pressed!')
@@ -61,22 +65,22 @@ const App = () => {
 
 ## API Reference
 
-Here’s an API reference for `@ahmedayob/duck-shortcut` in MDX format, detailing the types and usage of the `useShortcut` hook:
+Here’s an API reference for `@ahmedayob/duck-shortcut` in MDX format, detailing the types and usage of the `useDuckShortcut` hook:
 
-## `useShortcut`
+## `useDuckShortcut`
 
-The `useShortcut` hook allows you to bind keyboard shortcuts to callback functions in your React components.
+The `useDuckShortcut` hook allows you to bind keyboard shortcuts to callback functions in your React components.
 
 ### Importing
 
 ```jsx
-import { useShortcut } from '@ahmedayob/duck-shortcut'
+import { useDuckShortcut } from '@ahmedayob/duck-shortcut'
 ```
 
 ### Usage
 
 ```jsx
-useShortcut({
+useDuckShortcut({
   keys: /* Key combinations or sequences */,
   onKeysPressed: /* Callback function */,
 });
@@ -123,10 +127,10 @@ onKeysPressed: () => {
 ### Example
 
 ```jsx
-import { useShortcut } from '@ahmedayob/duck-shortcut'
+import { useDuckShortcut } from '@ahmedayob/duck-shortcut'
 
 const App = () => {
-  useShortcut({
+  useDuckShortcut({
     keys: ['ctrl+s', 'command+k'], // Define your shortcuts
     onKeysPressed: () => {
       // Callback when shortcuts are pressed
@@ -146,19 +150,19 @@ const App = () => {
 
 ## Type Definitions
 
-### `ShortcutProps`
+### `DuckShortcutProps`
 
 ```typescript
-interface ShortcutProps {
+interface DuckShortcutProps {
   keys: string | string[] // Key combinations or sequences
   onKeysPressed: () => void // Callback when shortcuts are pressed
 }
 ```
 
-### `useShortcut`
+### `useDuckShortcut`
 
 ```typescript
-declare function useShortcut(props: ShortcutProps): void
+declare function useDuckShortcut(props: DuckShortcutProps): void
 ```
 
 ## License
@@ -167,9 +171,9 @@ This library is available under the [MIT License](LICENSE).
 
 ## Contributing
 
-This reference includes type definitions for `ShortcutProps`, as well as detailed information on how to use the `useShortcut` hook.
+This reference includes type definitions for `DuckShortcutProps`, as well as detailed information on how to use the `useDuckShortcut` hook.
 
-Contributions are welcome! Please open issues and pull requests on the [GitHub repository](https://github.com/ahmedayob/shor).
+Contributions are welcome! Please open issues and pull requests on the [GitHub repository](https://github.com/TheDuckUI/shortcut).
 
 ## License
 
